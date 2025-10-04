@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: trash-to-treasure-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: trash-to-treasure
+
+  api:
+    build: ./backend/api
+    container_name: trash-to-treasure-api
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/trash-to-treasure
+      - ML_SERVICE_URL=http://ml-service:3001
+      - JWT_SECRET=your-secret-key
+    depends_on:
+      - mongodb
+      - ml-service
+    volumes:
+      - ./backend/api:/app
+      - /app/node_modules
+
+  ml-service:
+    build: ./backend/ml-service
+    container_name: trash-to-treasure-ml
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./backend/ml-service:/app
+      - /app/node_modules
+
+  web:
+    build: ./frontend/web
+    container_name: trash-to-treasure-web
+    ports:
+      - "3002:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:3000/api
+    volumes:
+      - ./frontend/web:/app
+      - /app/node_modules
+
+volumes:
+  mongo_data:

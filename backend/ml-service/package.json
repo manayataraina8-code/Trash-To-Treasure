@@ -1,0 +1,18 @@
+{
+  "name": "trash-to-treasure-ml",
+  "version": "1.0.0",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "train": "node src/training/simple_train.js",
+    "train-advanced": "node src/training/advanced_train.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "multer": "^1.4.4",
+    "axios": "^1.5.0",
+    "sharp": "^0.32.5",
+    "cors": "^2.8.5",
+    "fs-extra": "^11.1.1"
+  }
+}
