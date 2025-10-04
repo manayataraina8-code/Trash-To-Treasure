@@ -1,0 +1,5 @@
+Add images like:
+- old_iphone.jpg
+- broken_laptop.png
+- gaming_console.jpg
+- wireless_headphones.png
