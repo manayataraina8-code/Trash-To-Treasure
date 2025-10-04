@@ -62,7 +62,7 @@ function Dashboard() {
       </div>
 
       <div className="container">
-        <h2>Welcome back, {user?.name}!</h2>
+        <h2>Welcome back, {user?.name || JSON.parse(localStorage.getItem('user') || '{}')?.name || user?.email?.split('@')[0] || JSON.parse(localStorage.getItem('user') || '{}')?.email?.split('@')[0]}!</h2>
         
         <div className="stats">
           <div className="stat-card">

@@ -23,10 +23,11 @@ function Profile() {
       const completedItems = userItems.filter(item => item.status === 'completed').length;
       
       const userAchievements = [];
-      if (userItems.length >= 1) userAchievements.push({ title: 'First Item', icon: '🌟', desc: 'Submitted your first item' });
-      if (userItems.length >= 5) userAchievements.push({ title: 'Eco Warrior', icon: '♻️', desc: 'Submitted 5+ items' });
-      if (completedItems >= 1) userAchievements.push({ title: 'First Pickup', icon: '🚚', desc: 'Completed your first pickup' });
-      if (totalValue >= 100) userAchievements.push({ title: 'Value Creator', icon: '💰', desc: 'Generated $100+ in value' });
+      if (userItems.length >= 1) userAchievements.push({ title: 'SDG 12: Responsible Consumption', icon: '♻️', desc: 'Promoting sustainable consumption patterns' });
+      if (userItems.length >= 3) userAchievements.push({ title: 'SDG 11: Sustainable Cities', icon: '🏙️', desc: 'Building sustainable communities' });
+      if (completedItems >= 1) userAchievements.push({ title: 'SDG 8: Decent Work', icon: '💼', desc: 'Supporting economic growth through upcycling' });
+      if (totalValue >= 100) userAchievements.push({ title: 'SDG 1: No Poverty', icon: '🤝', desc: 'Creating economic opportunities' });
+      if (userItems.length >= 5) userAchievements.push({ title: 'SDG 13: Climate Action', icon: '🌍', desc: 'Taking action against climate change' });
       
       setAchievements(userAchievements);
     } catch (error) {
@@ -66,7 +67,7 @@ function Profile() {
               width: '80px',
               height: '80px',
               borderRadius: '50%',
-              background: '#007AFF',
+              background: '#006400',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -76,30 +77,39 @@ function Profile() {
             }}>
               {user?.name?.charAt(0).toUpperCase()}
             </div>
-            <div>
+            <div style={{flex: 1}}>
               <h2 style={{margin: '0'}}>{user?.name}</h2>
               <p style={{margin: '5px 0', color: '#666'}}>{user?.email}</p>
               <p style={{margin: '0', fontSize: '14px', color: '#999'}}>
-                Member since {new Date().toLocaleDateString()}
+                {user?.name} • Member since {new Date().toLocaleDateString()}
               </p>
             </div>
+            <button className="btn" style={{
+              background: '#006400',
+              color: 'white',
+              padding: '8px 16px',
+              fontSize: '14px',
+              alignSelf: 'flex-start'
+            }}>
+              Edit Profile
+            </button>
           </div>
 
           <div className="stats">
             <div className="stat-card">
-              <div className="stat-number">{items.length}</div>
+              <div className="stat-number" style={{color: '#006400'}}>{items.length}</div>
               <div className="stat-label">Items Submitted</div>
             </div>
             <div className="stat-card">
-              <div className="stat-number">{completedPickups}</div>
+              <div className="stat-number" style={{color: '#006400'}}>{completedPickups}</div>
               <div className="stat-label">Completed Pickups</div>
             </div>
             <div className="stat-card">
-              <div className="stat-number">₹{totalEarnings}</div>
+              <div className="stat-number" style={{color: '#006400'}}>₹{totalEarnings}</div>
               <div className="stat-label">Total Value</div>
             </div>
             <div className="stat-card">
-              <div className="stat-number">{user?.tokens || 0}</div>
+              <div className="stat-number" style={{color: '#006400'}}>{user?.tokens || 0}</div>
               <div className="stat-label">Tokens Earned</div>
             </div>
           </div>
@@ -107,35 +117,76 @@ function Profile() {
 
         <div className="grid">
           <div className="card">
-            <h3>🏆 Achievements</h3>
-            {achievements.length === 0 ? (
-              <p style={{color: '#666', textAlign: 'center', padding: '20px'}}>
-                Start submitting items to unlock achievements!
-              </p>
-            ) : (
-              <div>
-                {achievements.map((achievement, index) => (
-                  <div key={index} style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    padding: '10px',
-                    background: '#f8f9fa',
-                    borderRadius: '8px',
-                    marginBottom: '10px'
-                  }}>
-                    <span style={{fontSize: '24px', marginRight: '15px'}}>
-                      {achievement.icon}
-                    </span>
-                    <div>
-                      <h4 style={{margin: '0'}}>{achievement.title}</h4>
-                      <p style={{margin: '0', fontSize: '14px', color: '#666'}}>
-                        {achievement.desc}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+            <h3>🎯 SDGS IMPLEMENTED</h3>
+            <div>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                padding: '10px',
+                background: '#f8f9fa',
+                borderRadius: '8px',
+                marginBottom: '10px'
+              }}>
+                <span style={{fontSize: '24px', marginRight: '15px'}}>♻️</span>
+                <div>
+                  <h4 style={{margin: '0'}}>SDG 12: Responsible Consumption</h4>
+                  <p style={{margin: '0', fontSize: '14px', color: '#666'}}>
+                    Promoting sustainable consumption and production patterns
+                  </p>
+                </div>
               </div>
-            )}
+              
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                padding: '10px',
+                background: '#f8f9fa',
+                borderRadius: '8px',
+                marginBottom: '10px'
+              }}>
+                <span style={{fontSize: '24px', marginRight: '15px'}}>🏙️</span>
+                <div>
+                  <h4 style={{margin: '0'}}>SDG 11: Sustainable Cities</h4>
+                  <p style={{margin: '0', fontSize: '14px', color: '#666'}}>
+                    Making cities inclusive, safe, resilient and sustainable
+                  </p>
+                </div>
+              </div>
+              
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                padding: '10px',
+                background: '#f8f9fa',
+                borderRadius: '8px',
+                marginBottom: '10px'
+              }}>
+                <span style={{fontSize: '24px', marginRight: '15px'}}>💼</span>
+                <div>
+                  <h4 style={{margin: '0'}}>SDG 8: Decent Work</h4>
+                  <p style={{margin: '0', fontSize: '14px', color: '#666'}}>
+                    Promoting sustained economic growth and employment
+                  </p>
+                </div>
+              </div>
+              
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                padding: '10px',
+                background: '#f8f9fa',
+                borderRadius: '8px',
+                marginBottom: '10px'
+              }}>
+                <span style={{fontSize: '24px', marginRight: '15px'}}>🌍</span>
+                <div>
+                  <h4 style={{margin: '0'}}>SDG 13: Climate Action</h4>
+                  <p style={{margin: '0', fontSize: '14px', color: '#666'}}>
+                    Taking urgent action to combat climate change
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="card">
@@ -156,7 +207,7 @@ function Profile() {
                   }}>
                     <span style={{textTransform: 'capitalize'}}>{category}</span>
                     <span style={{
-                      background: '#007AFF',
+                      background: '#006400',
                       color: 'white',
                       padding: '2px 8px',
                       borderRadius: '12px',

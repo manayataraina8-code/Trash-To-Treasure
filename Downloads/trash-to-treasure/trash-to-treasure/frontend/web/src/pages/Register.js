@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { api } from '../services/api';
+import { authService } from '../services/api';
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -36,7 +36,7 @@ function Register() {
 
     setLoading(true);
     try {
-      await api.post('/auth/register', {
+      await authService.register({
         name: formData.name,
         email: formData.email,
         password: formData.password,
@@ -47,10 +47,10 @@ function Register() {
         }
       });
       
-      alert('Registration successful! Please login.');
-      navigate('/');
+      alert('Registration successful! You are now logged in.');
+      navigate('/dashboard');
     } catch (error) {
-      setError(error.response?.data?.error || 'Registration failed');
+      setError(error.message || 'Registration failed');
     } finally {
       setLoading(false);
     }
